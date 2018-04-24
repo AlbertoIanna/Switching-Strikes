@@ -11,7 +11,7 @@ public class EnemyBase : MonoBehaviour{
     private Vector3 respawnposition;
     private Vector3 Arriveposition = new Vector3(0,0,0);
 
-    public  void DealDamage() { }
+    
     private void Start()
     {
         transform.position = respawnposition;
@@ -20,6 +20,10 @@ public class EnemyBase : MonoBehaviour{
     private void Update()
     {
         Movement();
+    }
+
+    public  void DealDamage() {
+
     }
 
     public void Movement()

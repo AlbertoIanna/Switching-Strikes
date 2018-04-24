@@ -1,0 +1,7 @@
+Maya Message Log starting Thursday, February 22, 2018
+
+Error: Node "perspShape" has no attribute "ai_translator".
+Error: Node "topShape" has no attribute "ai_translator".
+Error: Node "frontShape" has no attribute "ai_translator".
+Error: Node "sideShape" has no attribute "ai_translator".
+Error: Node "pCylinderShape1" has no attribute "ai_translator".

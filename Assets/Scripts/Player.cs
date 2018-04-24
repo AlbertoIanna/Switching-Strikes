@@ -5,7 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     float timer;
-    public Color ColorStart= Color.red;
+    public Color ColorStart;
+
+    private void Start()
+    {
+        gameObject.GetComponent<Renderer>().material.color = ColorStart;
+        ColorStart = Color.red;
+    }
+
     private void FixedUpdate()
     {
         Movement();
@@ -17,20 +24,26 @@ public class Player : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             transform.position += new Vector3(-3, 0, 0);
+            ChangeColor();
             Debug.Log("sinistra");
         }
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             transform.position += new Vector3(3, 0, 0);
+            ChangeColor();
             Debug.Log("destra");
         }
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             transform.position += new Vector3(0, 0, 3);
+            ChangeColor();
             Debug.Log("su!");
             }
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
             transform.position += new Vector3(0, 0, -3);
+            ChangeColor();
             Debug.Log("Giù!");
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+            ChangeColor();
         timer += Time.deltaTime;
     }
 
@@ -45,9 +58,9 @@ public class Player : MonoBehaviour {
 
     void ChangeColor()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && ColorStart != Color.blue)
+        if (ColorStart != Color.blue)
             ColorStart = Color.blue;
-        else if (Input.GetKeyDown(KeyCode.Space) && ColorStart != Color.red)
+        else if (ColorStart != Color.red)
             ColorStart = Color.red;
             
     } 
