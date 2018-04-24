@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
         ColorStart = Color.red;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Movement();
         if (timer >= 2.5)
@@ -59,10 +59,15 @@ public class Player : MonoBehaviour {
     void ChangeColor()
     {
         if (ColorStart != Color.blue)
+        {
+            gameObject.GetComponent<Renderer>().material.color = ColorStart;
             ColorStart = Color.blue;
+        }
         else if (ColorStart != Color.red)
+        {
+            gameObject.GetComponent<Renderer>().material.color = ColorStart;
             ColorStart = Color.red;
-            
+        }
     } 
   
 }

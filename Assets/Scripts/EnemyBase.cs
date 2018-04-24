@@ -7,6 +7,7 @@ public class EnemyBase : MonoBehaviour{
     bool GotoRight ;
     bool GoDown ;
     float speed;
+    private static float RandomColor;
     private Color EnemyColor;
     private Vector3 respawnposition;
     private Vector3 Arriveposition = new Vector3(0,0,0);
@@ -15,6 +16,16 @@ public class EnemyBase : MonoBehaviour{
     private void Start()
     {
         transform.position = respawnposition;
+        gameObject.GetComponent<Renderer>().material.color = EnemyColor;
+        RandomColor = Random.Range(0f,2f);
+        if(RandomColor < 1f)
+        {
+            EnemyColor = Color.red;
+        }
+        else
+        {
+            EnemyColor = Color.blue;
+        }
     }
 
     private void Update()
@@ -58,6 +69,10 @@ public class EnemyBase : MonoBehaviour{
             if (transform.position.x >= Arriveposition.z)
                 transform.position = respawnposition;
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
 
