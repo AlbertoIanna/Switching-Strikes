@@ -4,76 +4,52 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour{
 
+    public ColorType color;
+
     bool GotoRight ;
     bool GoDown ;
+
     float speed;
+
     private static float RandomColor;
     private Color EnemyColor;
     private Vector3 respawnposition;
     private Vector3 Arriveposition = new Vector3(0,0,0);
-
+  
     
     private void Start()
     {
-        transform.position = respawnposition;
-        gameObject.GetComponent<Renderer>().material.color = EnemyColor;
+        respawnposition = transform.position;
+        gameObject.GetComponent<MeshRenderer>().material.color = EnemyColor;
         RandomColor = Random.Range(0f,2f);
-        if(RandomColor < 1f)
+        if(RandomColor <= 1f)
         {
             EnemyColor = Color.red;
+            color = ColorType.red;
         }
-        else
+        else if (RandomColor >1) 
         {
             EnemyColor = Color.blue;
+            color = ColorType.blue;
         }
     }
 
     private void Update()
     {
-        Movement();
+        if(transform.position.x!=0 || transform.position.z!=0)
+        Movement(new Vector3(0,0,0), 1.0f);
     }
 
-    public  void DealDamage() {
-
-    }
-
-    public void Movement()
+    public void Movement(Vector3 destination, float speed)
     {
-        if (transform.position.x > 0)
-            GotoRight = false;
-        if (transform.position.z < 0)
-            GoDown = false;
+        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
 
-        if (GotoRight == true)
-        {
-            transform.Translate(Vector3.right * Time.deltaTime);
-            if (transform.position.x <= Arriveposition.x)
-                transform.position = respawnposition;
-        }
-        else
-        {
-            transform.Translate(Vector3.left * Time.deltaTime);
-            if (transform.position.x >= Arriveposition.x)
-                transform.position = respawnposition;
-        }
-
-        if (GoDown == true)
-        {
-            transform.Translate(Vector3.down* Time.deltaTime);
-            if (transform.position.z <= Arriveposition.z)
-                transform.position = respawnposition;
-        }
-        else
-        {
-            transform.Translate(Vector3.up* Time.deltaTime);
-            if (transform.position.x >= Arriveposition.z)
-                transform.position = respawnposition;
-        }
     }
-    private void OnCollisionEnter(Collision collision)
+    public void Die()
     {
-        
+        Destroy(gameObject);
     }
+
 
 
 }
